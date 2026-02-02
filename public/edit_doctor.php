@@ -10,8 +10,6 @@ if (!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'];
-
-/* FETCH DOCTOR */
 $stmt = $pdo->prepare("SELECT * FROM doctors WHERE id = ?");
 $stmt->execute([$id]);
 $doctor = $stmt->fetch();
@@ -21,7 +19,6 @@ if (!$doctor) {
     exit;
 }
 
-/* UPDATE DOCTOR */
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $pdo->prepare("UPDATE doctors SET name = ?, specialization = ? WHERE id = ?");
     $stmt->execute([

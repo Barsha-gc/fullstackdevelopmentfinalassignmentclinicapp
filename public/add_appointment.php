@@ -3,10 +3,8 @@ require_once "../auth/auth_check.php";
 require_once "../config/db.php";
 include "../includes/header.php";
 
-// Fetch patients for dropdown
 $patients = $pdo->query("SELECT id, name FROM patients ORDER BY name")->fetchAll();
 
-// Fetch doctors for dropdown
 $doctors = $pdo->query("SELECT id, name FROM doctors ORDER BY name")->fetchAll();
 
 $error = "";
@@ -18,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $date       = $_POST['date'];
     $time       = $_POST['time'];
 
-    // Check if time slot already exists
     $check = $pdo->prepare("
         SELECT COUNT(*) 
         FROM appointments 

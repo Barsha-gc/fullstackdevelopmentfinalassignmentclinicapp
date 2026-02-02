@@ -4,7 +4,6 @@ require_once "../config/db.php";
 require_once "../includes/functions.php";
 include "../includes/header.php";
 
-/* ADD DOCTOR */
 if (isset($_POST['add_doctor'])) {
     $stmt = $pdo->prepare(
         "INSERT INTO doctors (name, specialization) VALUES (?, ?)"
@@ -15,7 +14,6 @@ if (isset($_POST['add_doctor'])) {
     ]);
 }
 
-/* DELETE DOCTOR */
 if (isset($_GET['delete'])) {
     $stmt = $pdo->prepare("DELETE FROM doctors WHERE id = ?");
     $stmt->execute([$_GET['delete']]);
@@ -23,13 +21,11 @@ if (isset($_GET['delete'])) {
     exit;
 }
 
-/* FETCH DOCTORS */
 $doctors = $pdo->query("SELECT * FROM doctors");
 ?>
 
 <div class="container">
 
-    <!-- CENTERED ADD DOCTOR FORM -->
     <div class="center-page">
         <div class="form-card">
             <h3>Add Doctor</h3>
@@ -45,8 +41,7 @@ $doctors = $pdo->query("SELECT * FROM doctors");
             </form>
         </div>
     </div>
-
-    <!-- DOCTOR LIST -->
+    
     <div class="table-card">
         <h3>Doctors List</h3>
 

@@ -2,7 +2,6 @@
 require_once "../auth/auth_check.php";
 require_once "../config/db.php";
 
-/* Get values safely */
 $doctorName = $_GET['doctor'] ?? '';
 $date = $_GET['date'] ?? '';
 
@@ -11,7 +10,6 @@ if (!$doctorName || !$date) {
     exit;
 }
 
-/* Find doctor ID from name */
 $stmt = $pdo->prepare("SELECT id FROM doctors WHERE name = ?");
 $stmt->execute([$doctorName]);
 $doctor = $stmt->fetch();

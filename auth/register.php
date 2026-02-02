@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = trim($_POST['password'] ?? '');
     $confirm = trim($_POST['confirm_password'] ?? '');
 
-    // Basic validation
     if ($email === "" || $password === "" || $confirm === "") {
         $error = "All fields are required.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -22,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $error = "Password must be at least 6 characters.";
     } else {
 
-        // Check if email already exists
         $check = $pdo->prepare("SELECT id FROM clinic_users WHERE email = ?");
         $check->execute([$email]);
 
@@ -30,10 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $error = "Email already registered.";
         } else {
 
-            // Hash password (THIS FIXES YOUR ISSUE)
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            // Insert user
             $stmt = $pdo->prepare(
                 "INSERT INTO clinic_users (email, password) VALUES (?, ?)"
             );

@@ -22,7 +22,6 @@ include "../includes/header.php";
 
     <div class="features">
 
-        <!-- Book Appointment (Visible only when NOT logged in) -->
         <?php if (!isset($_SESSION['user_id'])): ?>
             <div class="feature-card">
                 <h3>Book Appointment</h3>
